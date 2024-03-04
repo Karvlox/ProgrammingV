@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      ExamenClase.EjerciciosResueltos
       ExamenClase.Exercises_CarlosBallester
       ExercisesChapter2.ExcercisesForBook
       ExercisesChapter2.Exercise2

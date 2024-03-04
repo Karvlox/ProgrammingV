@@ -1,24 +1,59 @@
-import Data.Char (isDigit)
+module Main where
 
 split :: String -> Char -> [String]
 split [] _ = []
 split (x:xs) c
-    | x == c = split xs c
-    | otherwise = (x : takeWhile (/= c) xs) : split (dropWhile (/= c) xs) c
+  | x == c = split xs c
+  | otherwise = (x : takeWhile (/= c) xs) : split (dropWhile (/= c) xs) c
 
-appendList :: String -> [String]
-appendList x = split x ' '
+calculateAverage :: [Int] -> Double
+calculateAverage xs = fromIntegral (sumElements xs) / fromIntegral (length xs)
 
-calculateAverageAge :: [String] -> Double
-calculateAverageAge [] = 0
-calculateAverageAge xs = fromIntegral (sum (map read xs)) / fromIntegral (length xs)
+sumElements :: [Int] -> Int
+sumElements [] = 0
+sumElements (x:xs) = x + sumElements xs
 
-returnNames :: [String] -> [String]
-returnNames = map head . map appendList
+getNames :: String -> [String]
+getNames input = split input ','
+
+getAges :: [String] -> [String]
+getAges [] = []
+getAges (x:xs) = secondElement (words x) : getAges xs
+
+
+filterAgeLessThan  :: [(String, Int)] -> Int -> [(String, Int)]
+filterAgeLessThan  [] _ = []
+filterAgeLessThan  ((name, age):xs) limit
+    | age < limit = (name, age) : filterAgeLessThan xs limit
+    | otherwise = filterAgeLessThan xs limit
+
+
+filterAgeRange :: [(String, Int)] -> Int -> Int -> [(String, Int)]
+filterAgeRange [] _ _ = []
+filterAgeRange ((name, age):xs) x y
+    | age >= x && age <= y = (name, age) : filterAgeRange xs x y
+    | otherwise = filterAgeRange xs x y
+
+getStudentsInRange :: [String] -> [String] -> Int -> Int -> [(String, Int)]
+getStudentsInRange names ages x y =
+    let studentAges = zip names (map convertToInt ages)
+    in filterAgeRange studentAges x y
+
+
+convertToInt :: String -> Int
+convertToInt str = read str :: Int
+
+secondElement :: [String] -> String
+secondElement [] = ""
+secondElement (_:x:_) = x
+secondElement _ = ""
 
 main :: IO ()
 main = do
-    let students = "Ana 25, Jose 37, Maria 23, John 33"
-    let studentList = appendList students
-    putStrLn $ "List of Student Names: " ++ show (returnNames studentList)
-    putStrLn $ "Average Age: " ++ show (calculateAverageAge (map (read . last . appendList) studentList))
+    input <- getLine
+    let students = getNames input
+        ages = getAges students
+    putStrLn "Lista de estudiantes:"
+    print students
+    putStrLn "Lista de edades:"
+    print ages
