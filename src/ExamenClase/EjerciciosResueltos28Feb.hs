@@ -1,4 +1,4 @@
-module Main where
+module EjerciciosResueltos28Feb where
 
 split :: String -> Char -> [String]
 split [] _ = []
