@@ -47,13 +47,3 @@ secondElement :: [String] -> String
 secondElement [] = ""
 secondElement (_:x:_) = x
 secondElement _ = ""
-
-main :: IO ()
-main = do
-    input <- getLine
-    let students = getNames input
-        ages = getAges students
-    putStrLn "Lista de estudiantes:"
-    print students
-    putStrLn "Lista de edades:"
-    print ages
