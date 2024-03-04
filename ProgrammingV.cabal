@@ -25,6 +25,9 @@ source-repository head
 
 library
   exposed-modules:
+      ExamenClase.Exercises_CarlosBallester
+      ExercisesChapter2.ExcercisesForBook
+      ExercisesChapter2.Exercise2
       HanoiTowers
   other-modules:
       Paths_ProgrammingV
