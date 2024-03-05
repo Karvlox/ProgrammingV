@@ -1,11 +1,19 @@
-Y Combinator es una prestigiosa aceleradora de startups con sede en Silicon Valley. Funciona como un programa intensivo de incubación que proporciona financiamiento, mentoría y recursos a emprendedores para ayudarles a lanzar y hacer crecer sus empresas. Aquí te explico cómo funciona la estructura de Y Combinator:
 
-Solicitud: Los emprendedores interesados en participar en Y Combinator deben presentar una solicitud en línea que incluya detalles sobre su idea de negocio, equipo fundador y otros aspectos relevantes.
+El Y-combinator es una construcción en el cálculo lambda que permite la recursión sin la necesidad de hacer referencia directa a la función dentro de sí misma. Esto es útil en lenguajes funcionales puros donde la recursión tradicional no es posible debido a la falta de asignaciones de variables mutables y bucles.
 
-Selección: El equipo de Y Combinator revisa las solicitudes y selecciona a un grupo de startups prometedoras para formar parte de cada cohorte. La selección se basa en criterios como la innovación de la idea, el potencial de crecimiento y la capacidad del equipo fundador.
+Para entender cómo funciona el Y-combinator, veamos su definición en Haskell:
 
-Programa de incubación: Las startups seleccionadas participan en un programa de incubación intensivo que suele tener una duración de varios meses. Durante este tiempo, reciben financiamiento inicial, asesoramiento personalizado de mentores experimentados y acceso a una amplia red de contactos en la industria.
+y :: (t -> t) -> t
+y f = (\x -> f (x x)) (\x -> f (x x))
 
-Demo Day: Al final del programa, las startups tienen la oportunidad de presentar sus proyectos ante inversores, medios de comunicación y otros actores clave en un evento conocido como Demo Day. Este evento ofrece a las startups la posibilidad de asegurar inversión adicional y generar interés en su producto o servicio.
 
-Seguimiento y apoyo continuo: Aunque el programa de incubación formalmente concluye después del Demo Day, Y Combinator continúa brindando apoyo a las startups a través de su red de exalumnos, eventos de networking y recursos adicionales.
+Aquí, y toma una función f como argumento y devuelve una función que aplica f a su propio resultado, lo que crea una función recursiva. La clave para entender el Y-combinator está en la autoaplicación (\x -> f (x x)) (\x -> f (x x)).
+
+Veamos paso a paso cómo funciona:
+
+Se pasa una función f al Y-combinator.
+Se aplica una función lambda al Y-combinator. Esta lambda toma un argumento x y devuelve f aplicada a (x x).
+Dentro de esta lambda, (x x) es una autoaplicación. Esto significa que el argumento x se pasa a sí mismo. Por lo tanto, (x x) es esencialmente la recursión en sí misma.
+Entonces, f se aplica a (x x), lo que da como resultado un paso recursivo en la función f.
+Esto crea una función recursiva sin la necesidad de hacer referencia directa a la función dentro de sí misma.
+En resumen, el Y-combinator permite la recursión en funciones en el cálculo lambda al proporcionar una forma de autoaplicación que genera el comportamiento recursivo deseado. Esto es especialmente útil en lenguajes funcionales donde la recursión es una herramienta fundamental.   

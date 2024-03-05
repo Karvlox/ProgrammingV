@@ -1,19 +1,25 @@
+import Data.List
 
-yCombinator :: (a -> a) -> a
-yCombinator f = f (yCombinator f)
+import Data.List
 
+-- Definición del Y-combinator
+y :: (t -> t) -> t
+y f = (\x -> f (x x)) (\x -> f (x x))
 
-orOperation :: Bool -> Bool -> Bool
-orOperation = yCombinator (\f x y -> if x then True else (if y then True else False))
+-- Función para operador AND
+andFunc :: [Bool] -> Bool
+andFunc = y (\f -> \case
+                    []     -> True
+                    (x:xs) -> x && f xs)
 
 
 main :: IO ()
 main = do
-  let result1 = orOperation True True
-      result2 = orOperation True False
-      result3 = orOperation False True
-      result4 = orOperation False False
-  putStrLn $ "True OR True = " ++ show result1
-  putStrLn $ "True OR False = " ++ show result2
-  putStrLn $ "False OR True = " ++ show result3
-  putStrLn $ "False OR False = " ++ show result4
+    let boolList1 = [True, True, True]
+        boolList2 = [True, False, True]
+    putStrLn $ "El resultado de AND para la lista " ++ show boolList1 ++ " es: " ++ show (andFunc boolList1)
+    putStrLn $ "El resultado de AND para la lista " ++ show boolList2 ++ " es: " ++ show (andFunc boolList2)
+
+
+-- El resultado de AND para la lista [True, True, True] es: True
+-- El resultado de AND para la lista [True, False, True] es: False
