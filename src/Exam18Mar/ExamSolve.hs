@@ -8,8 +8,8 @@ data Expr = Var Char
 
 -- Función que convierte un carácter y dos expresiones en una expresión lógica
 convertToExpression :: Char -> Expr -> Expr -> Expr
-convertToExpression '^' e1 e2 = And e1 e2
-convertToExpression '|' e1 e2 = Or e1 e2
+convertToExpression '∩' e1 e2 = And e1 e2
+convertToExpression '∪' e1 e2 = Or e1 e2
 convertToExpression _ e1 e2   = Var '0'  -- Valor por defecto, en caso de operador no reconocido
 
 -- Función que verifica si un carácter es un operador lógico
@@ -18,8 +18,8 @@ isOperator c = c `elem` "^|"
 
 -- Función que construye una expresión lógica a partir de una cadena de texto
 parseExpression  :: String -> Expr
-parseExpression  []       = Var '0'  -- Si la cadena está vacía, devuelve una variable nula
-parseExpression  [x]      = Var x   -- Si la cadena tiene un solo carácter, devuelve una variable
+parseExpression  []       = Var '0'
+parseExpression  [x]      = Var x  
 parseExpression  ('~':xs) = Not (parseExpression  xs)
 parseExpression  (x:y:xs)
   | isOperator y = convertToExpression y (parseExpression  [x]) (parseExpression  xs)
