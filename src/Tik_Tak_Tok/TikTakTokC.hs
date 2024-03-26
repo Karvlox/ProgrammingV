@@ -1,4 +1,4 @@
-module TikTaktok where
+module TikTaktokC where
 
 import Data.List (transpose)
 import Data.List (update)
